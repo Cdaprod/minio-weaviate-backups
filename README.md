@@ -1,0 +1,2 @@
+# minio-weaviate-backups
+POC
