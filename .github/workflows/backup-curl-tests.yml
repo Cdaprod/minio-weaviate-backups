@@ -16,6 +16,11 @@ jobs:
       run: |
         docker-compose -f new-docker-compose.yaml up -d
 
+    - name: Wait for Weaviate to be ready
+      run: |
+        echo "Waiting for Weaviate service to start..."
+        sleep 30 # waits for 30 seconds
+
     - name: Create Weaviate Schema
       run: |
         curl -X POST -H "Content-Type: application/json" \
