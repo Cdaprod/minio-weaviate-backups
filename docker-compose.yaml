@@ -5,7 +5,7 @@ services:
     container_name: minio_server
     image: minio/minio
     volumes:
-      - ./minio/data:/data
+      - ./minio-data:/data
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -30,10 +30,10 @@ services:
       BACKUP_S3_USE_SSL: 'false'
       CLUSTER_HOSTNAME: 'node1'
     volumes:
-      - ./weaviate/data:/var/lib/weaviate
+      - ./weaviate-data:/var/lib/weaviate
     depends_on:
       - minio
 
 volumes:
   minio-data:
-    driver: local
+  weaviate-data:
