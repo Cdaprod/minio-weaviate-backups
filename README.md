@@ -1,8 +1,16 @@
-# minio-weaviate-backups
+# MinIO-Weaviate Backups
+
+This repository contains the necessary configurations and instructions to set up and test backup processes using MinIO with Weaviate. It's designed to showcase the integration of MinIO, a high-performance object storage, with Weaviate, an AI-powered search engine, focusing on the backup and restore functionalities within a Dockerized environment.
+
+## Badges
 
 [![Weaviate POC Test](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/backup-curl-tests.yml/badge.svg)](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/backup-curl-tests.yml)
 
 [![Update README with Directory Tree](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/update_readme.yml/badge.svg)](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/update_readme.yml)
+
+## Project Structure
+
+Below is the directory structure of the `minio-weaviate-backups` project, which includes Docker Compose configurations, Dockerfile for MinIO setup, entrypoint scripts, and Weaviate data schemas.
 
 <!-- DIRECTORY_TREE_START -->
 ```
@@ -33,3 +41,57 @@
 
 ```
 <!-- DIRECTORY_TREE_END -->
+
+## Getting Started
+
+### Prerequisites
+
+- Docker and Docker Compose installed on your machine.
+- Basic knowledge of Docker containerization and orchestration.
+
+### Setup
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone https://github.com/Cdaprod/minio-weaviate-backups.git
+   ```
+
+2. **Navigate to the Project Directory:**
+
+   ```bash
+   cd minio-weaviate-backups
+   ```
+
+3. **Build and Run Containers:**
+
+   Use the provided Docker Compose files to build and start the MinIO and Weaviate services.
+
+   ```bash
+   docker-compose -f docker-compose.yaml up -d
+   ```
+
+### Testing
+
+Follow the instructions in `CMD.md` to create a Weaviate schema, index data, perform backups, and restore data using `curl` commands.
+
+## Usage
+
+Describe how to use the project, including how to perform backups, restore operations, and any other functionalities provided by the project.
+
+## Contributing
+
+We welcome contributions! Please read our [Contributing Guide](LINK_TO_CONTRIBUTING_GUIDE) for details on our code of conduct, and the process for submitting pull requests to us.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [MinIO](https://min.io/) for the object storage system.
+- [Weaviate](https://www.semi.technology/developers/weaviate/current/) for the AI-powered search engine.
+
+---
+
+This template is a starting point. You should customize each section to fit the specifics of your project, such as providing more detailed setup and usage instructions, including examples of `curl` commands for interacting with Weaviate, and describing how the backup and restore processes work within your setup.
