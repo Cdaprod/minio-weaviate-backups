@@ -1,2 +1,4 @@
 # minio-weaviate-backups
-POC
+
+<!-- DIRECTORY_TREE_START -->
+<!-- DIRECTORY_TREE_END -->
