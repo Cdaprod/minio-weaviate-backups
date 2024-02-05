@@ -25,6 +25,7 @@ Below is the directory structure of the `minio-weaviate-backups` project, which 
 │   └── entrypoint.sh
 └── weaviate
     ├── CMD.md
+    ├── Dockerfile
     ├── data
     │   ├── classifications.db
     │   ├── migration1.19.filter2search.skip.flag
@@ -35,9 +36,10 @@ Below is the directory structure of the `minio-weaviate-backups` project, which 
     │   │   └── raft.db
     │   └── schema.db
     ├── data.json
+    ├── entrypoint.sh
     └── schema.json
 
-5 directories, 16 files
+5 directories, 18 files
 
 ```
 <!-- DIRECTORY_TREE_END -->
