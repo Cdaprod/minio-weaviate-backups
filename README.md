@@ -23,6 +23,7 @@ Below is the directory structure of the `minio-weaviate-backups` project, which 
 │   ├── Dockerfile
 │   ├── data
 │   └── entrypoint.sh
+├── s3_backup_module.ipynb
 └── weaviate
     ├── CMD.md
     ├── Dockerfile
@@ -39,7 +40,7 @@ Below is the directory structure of the `minio-weaviate-backups` project, which 
     ├── entrypoint.sh
     └── schema.json
 
-5 directories, 18 files
+5 directories, 19 files
 
 ```
 <!-- DIRECTORY_TREE_END -->
