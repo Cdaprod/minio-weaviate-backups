@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        persist-credentials: false  # avoids persisting GitHub credentials
+        persist-credentials: false
 
     - name: Setup Python
       uses: actions/setup-python@v4
