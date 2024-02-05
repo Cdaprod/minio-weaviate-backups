@@ -25,7 +25,6 @@ Below is the directory structure of the `minio-weaviate-backups` project, which 
 │   └── entrypoint.sh
 └── weaviate
     ├── CMD.md
-    ├── Dockerfile
     ├── data
     │   ├── classifications.db
     │   ├── migration1.19.filter2search.skip.flag
@@ -36,10 +35,9 @@ Below is the directory structure of the `minio-weaviate-backups` project, which 
     │   │   └── raft.db
     │   └── schema.db
     ├── data.json
-    ├── entrypoint.sh
     └── schema.json
 
-5 directories, 18 files
+5 directories, 16 files
 
 ```
 <!-- DIRECTORY_TREE_END -->
@@ -87,13 +85,9 @@ We welcome contributions! Please read our [Contributing Guide](LINK_TO_CONTRIBUT
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE) - see the LICENSE file for details.
+This project is licensed under the [MIT License](LICENSE) - David Cannan Cdaprod
 
 ## Acknowledgments
 
 - [MinIO](https://min.io/) for the object storage system.
 - [Weaviate](https://www.semi.technology/developers/weaviate/current/) for the AI-powered search engine.
-
----
-
-This template is a starting point. You should customize each section to fit the specifics of your project, such as providing more detailed setup and usage instructions, including examples of `curl` commands for interacting with Weaviate, and describing how the backup and restore processes work within your setup.
