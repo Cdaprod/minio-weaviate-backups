@@ -24,14 +24,12 @@ jobs:
     - name: Create Weaviate Schema
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        --data @schema.json http://localhost:8080/v1/schema
-      working-directory: ./weaviate 
+        --data @./weaviate/schema.json http://localhost:8080/v1/schema
 
     - name: Index Data
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        --data @data.json http://localhost:8080/v1/objects
-      working-directory: ./weaviate 
+        --data @./weaviate/data.json http://localhost:8080/v1/objects
 
     - name: Perform Backup
       run: |
