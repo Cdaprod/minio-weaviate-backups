@@ -1,0 +1,33 @@
+name: Test Weaviate Backup with Jupyter Notebook
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Docker Compose
+      run: docker-compose up -d
+
+    - name: Install Jupyter and nbconvert
+      run: |
+        pip install notebook nbconvert
+
+    - name: Execute Jupyter Notebook
+      run: |
+        jupyter nbconvert --to notebook --execute --inplace s3_backup_module.ipynb
+
+    - name: Check Notebook Output
+      run: |
+        # Add commands to check for specific outputs in the notebook, if required
+
+    - name: Shutdown Docker Compose
+      run: docker-compose down
