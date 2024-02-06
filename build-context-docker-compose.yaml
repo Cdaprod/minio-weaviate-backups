@@ -3,6 +3,7 @@ version: '3.8'
 services:
   minio:
     container_name: minio_server
+    image: cdaprod/minio-server:latest
     build:
       context: ./minio
     volumes:
@@ -13,6 +14,7 @@ services:
 
   weaviate:
     container_name: weaviate_server
+    image: cdaprod/weaviate-server:latest
     build:
       context: ./weaviate
     ports:
