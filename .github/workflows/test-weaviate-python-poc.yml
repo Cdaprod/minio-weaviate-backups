@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Set up Docker Compose
-      run: docker-compose up -d
+      run: docker-compose -f build-context-docker-compose.yaml up -d
 
     - name: Install Jupyter and nbconvert
       run: |
