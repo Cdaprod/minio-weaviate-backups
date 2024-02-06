@@ -25,16 +25,18 @@ jobs:
       run: |
         curl -X POST -H "Content-Type: application/json" \
         --data @schema.json http://localhost:8080/v1/schema
+      working-directory: ./weaviate 
 
     - name: Index Data
       run: |
         curl -X POST -H "Content-Type: application/json" \
         --data @data.json http://localhost:8080/v1/objects
+      working-directory: ./weaviate 
 
     - name: Perform Backup
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        --data '{"id": "this-backup-id"}' http://localhost:8080/v1/backups/s3
+        --data '{"id": "backup-id"}' http://localhost:8080/v1/backups/s3
 
     - name: Restore Data
       run: |
