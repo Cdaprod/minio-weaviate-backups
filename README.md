@@ -6,11 +6,8 @@ This repository contains the necessary configurations and instructions to set up
 
 [![Docker Compose Test Workflow for build-context-docker-compose.yaml](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/build-context-docker-compose.yml/badge.svg)](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/build-context-docker-compose.yml)
 
-<<<<<<< main
-=======
 [![Docker Compose Test Build and Push](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/build-context-compose-and-push.yml/badge.svg)](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/build-context-compose-and-push.yml)
 
->>>>>>> origin/main
 [![Update README with Directory Tree](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/update_readme.yml/badge.svg)](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/update_readme.yml)
 
 ## Project Structure
