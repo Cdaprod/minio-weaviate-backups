@@ -17,6 +17,7 @@ python backup_s3.py
 echo "Query objects and export data.json..."
 python query_objects_data.py
 
+
 # Keep the container running after scripts execution
 # This line is useful if you want to prevent the container from exiting after the scripts complete.
 # If your container should close after execution, you can comment or remove this line.
