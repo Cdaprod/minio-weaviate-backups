@@ -1,4 +1,4 @@
-name: Weaviate POC Test
+name: MinIO Weaviate Python POC
 
 on: [push]
 
