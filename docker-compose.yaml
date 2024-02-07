@@ -34,3 +34,8 @@ services:
     depends_on:
       - minio
 
+  python-environment:
+    build:
+      context: ./app
+    depends_on:
+      - weaviate
