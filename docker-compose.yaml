@@ -39,3 +39,4 @@ services:
       context: ./app
     depends_on:
       - weaviate
+      - minio
