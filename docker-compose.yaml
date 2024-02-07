@@ -37,6 +37,8 @@ services:
   python-environment:
     build:
       context: ./app
+    volumes:
+      - ./app/data:app/data 
     depends_on:
       - weaviate
       - minio

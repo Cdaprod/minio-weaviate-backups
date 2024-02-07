@@ -23,3 +23,4 @@ schema = {
 client.schema.delete_class('Article')
 client.schema.delete_class('Author')
 client.schema.create(schema)
+client.schema.get()
