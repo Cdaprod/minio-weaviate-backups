@@ -19,6 +19,15 @@ Below is the directory structure of the `minio-weaviate-backups` project, which 
 .
 ├── DIRECTORY_TREE.txt
 ├── README.md
+├── app
+│   ├── Dockerfile
+│   ├── __init__.py
+│   ├── backup_s3.py
+│   ├── create_schema.py
+│   ├── entrypoint.sh
+│   ├── index_data.py
+│   ├── query_object_data.py
+│   └── requirements.txt
 ├── build-context-docker-compose.yaml
 ├── docker-compose.yaml
 ├── minio
@@ -42,7 +51,7 @@ Below is the directory structure of the `minio-weaviate-backups` project, which 
     ├── entrypoint.sh
     └── schema.json
 
-5 directories, 19 files
+6 directories, 27 files
 
 ```
 <!-- DIRECTORY_TREE_END -->
