@@ -38,7 +38,10 @@ services:
     build:
       context: ./app
     volumes:
-      - ./app/data:app/data 
+      - ./app-data:app/data 
     depends_on:
       - weaviate
       - minio
+
+volumes:
+  app-data:
