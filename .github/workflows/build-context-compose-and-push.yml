@@ -25,9 +25,14 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and run docker-compose
-      run: docker-compose -f build-context-docker-compose.yaml up --build -d
+    - name: Docker Compose Build
+      run: docker-compose -f build-context-docker-compose.yaml build
+
+    - name: Docker Compose Up
+      run: docker-compose -f build-context-docker-compose.yaml up -d
 
     - name: Push Docker images to Docker Hub
-      run: |
-        docker-compose push
+      run: docker-compose -f build-context-docker-compose.yaml push
+
+    - name: Docker Compose Down
+      run: docker-compose -f build-context-docker-compose.yaml down
