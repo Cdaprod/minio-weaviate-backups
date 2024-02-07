@@ -23,23 +23,23 @@ jobs:
 
     - name: Create Weaviate Schema
       run: |
-        curl -X POST -H "Content-Type: application/json" \
+        docker-compose exec -T weaviate curl -X POST -H "Content-Type: application/json" \
         --data '{"classes": [{"class": "Article", "description": "A class to store articles", "properties": [{"name": "title", "dataType": ["string"], "description": "The title of the article"}, {"name": "content", "dataType": ["text"], "description": "The content of the article"}, {"name": "datePublished", "dataType": ["date"], "description": "The date the article was published"}, {"name": "url", "dataType": ["string"], "description": "The URL of the article"}]}, {"class": "Author", "description": "A class to store authors", "properties": [{"name": "name", "dataType": ["string"], "description": "The name of the author"}, {"name": "articles", "dataType": ["Article"], "description": "The articles written by the author"}]}]}' \
         http://weaviate:8080/v1/schema
 
     - name: Index Data
       run: |
-        curl -X POST -H "Content-Type: application/json" \
+        docker-compose exec -T weaviate curl -X POST -H "Content-Type: application/json" \
         --data @./weaviate/data.json http://weaviate:8080/v1/objects
 
     - name: Perform Backup
       run: |
-        curl -X POST -H "Content-Type: application/json" \
+        docker-compose exec -T weaviate curl -X POST -H "Content-Type: application/json" \
         --data '{"id": "backup-id"}' http://weaviate:8080/v1/backups/s3
 
     - name: Restore Data
       run: |
-        curl -X POST -H "Content-Type: application/json" \
+        docker-compose exec -T weaviate curl -X POST -H "Content-Type: application/json" \
         http://weaviate:8080/v1/backups/s3/backup-id/restore
 
     - name: Clean up
