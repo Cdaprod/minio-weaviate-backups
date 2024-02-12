@@ -1,4 +1,4 @@
-name: Weaviate POC Test
+name: Build Weaviate Curl Tests
 
 on: [push]
 
@@ -14,33 +14,38 @@ jobs:
 
     - name: Set up Docker Compose
       run: |
-        docker-compose -f build-context-docker-compose.yaml up -d
+        docker-compose -f docker-compose.yaml up -d
 
     - name: Wait for Weaviate to be ready
       run: |
         echo "Waiting for Weaviate service to start..."
-        sleep 5 # waits for 30 seconds
+        sleep 10 # Adjusted to 10 seconds for clarity
 
     - name: Create Weaviate Schema
       run: |
-        curl -X POST -H "Content-Type: application/json" \
+        curl -X PUT -H "Content-Type: application/json" \
         --data '{"classes": [{"class": "Article", "description": "A class to store articles", "properties": [{"name": "title", "dataType": ["string"], "description": "The title of the article"}, {"name": "content", "dataType": ["text"], "description": "The content of the article"}, {"name": "datePublished", "dataType": ["date"], "description": "The date the article was published"}, {"name": "url", "dataType": ["string"], "description": "The URL of the article"}]}, {"class": "Author", "description": "A class to store authors", "properties": [{"name": "name", "dataType": ["string"], "description": "The name of the author"}, {"name": "articles", "dataType": ["Article"], "description": "The articles written by the author"}]}]}' \
-        http://weaviate:8080/v1/schema/
+        http://localhost:8080/v1/schema/Article
 
     - name: Index Data
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        --data @./weaviate/data.json http://weaviate:8080/v1/objects
+        --data @./weaviate/data.json http://localhost:8080/v1/objects
 
     - name: Perform Backup
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        --data '{"id": "backup-id"}' http://weaviate:8080/v1/backups/s3
+        --data '{"id": "backup-id"}' http://localhost:8080/v1/backups/s3
 
     - name: Restore Data
       run: |
         curl -X POST -H "Content-Type: application/json" \
-        http://weaviate:8080/v1/backups/s3/backup-id/restore
+        http://localhost:8080/v1/backups/s3/backup-id/restore
+
+    - name: Adjust file permissions (if needed)
+      run: |
+        sudo chown -R $(whoami) ./weaviate/data
+        sudo chmod -R u+rw ./weaviate/data
 
     - name: Clean up
       run: docker-compose down
