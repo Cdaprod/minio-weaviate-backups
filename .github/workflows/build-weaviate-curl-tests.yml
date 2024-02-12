@@ -29,8 +29,8 @@ jobs:
 
     - name: Index Data
       run: |
-        curl -X POST -H "Content-Type: application/json" \
-        --data @./weaviate/data.json http://localhost:8080/v1/objects
+        curl -X POST http://localhost:8080/v1/objects/batch \
+        -H "Content-Type: application/json" --data @data.json
 
     - name: Perform Backup
       run: |
