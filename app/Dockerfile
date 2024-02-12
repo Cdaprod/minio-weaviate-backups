@@ -7,7 +7,7 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy your Python scripts and entrypoint script
-COPY create_schema.py index_data.py query_object_data.py entrypoint.sh /app/
+COPY . /app/
 
 # Make the entrypoint script executable
 RUN chmod +x /app/entrypoint.sh
