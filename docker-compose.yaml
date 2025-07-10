@@ -1,4 +1,4 @@
-version: '3.8'
+name: minio-weaviate-backup
 
 services:
   minio:
@@ -12,8 +12,6 @@ services:
       - "9001:9001"
     command: server /data --console-address ":9001"
 
-
-  weaviate:
   weaviate:
     command:
     - --host
