@@ -1,3 +1,4 @@
+/.github/workflows/weaviate-poc-test.yml
 name: Weaviate POC Test
 
 on: [push]
@@ -5,42 +6,56 @@ on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
-    services:
-      docker:
-        image: docker:19.03.12
-        options: --privileged
+
     steps:
-    - uses: actions/checkout@v2
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Compose
-      run: |
-        docker-compose -f build-context-docker-compose.yaml up -d
+      # 2. Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-    - name: Wait for Weaviate to be ready
-      run: |
-        echo "Waiting for Weaviate service to start..."
-        sleep 5 # waits for 30 seconds
+      # 3. Install Docker Compose plugin
+      - name: Set up Docker Compose
+        uses: docker/setup-compose-action@v1
 
-    - name: Create Weaviate Schema
-      run: |
-        docker-compose exec -T weaviate curl -X POST -H "Content-Type: application/json" \
-        --data '{"classes": [{"class": "Article", "description": "A class to store articles", "properties": [{"name": "title", "dataType": ["string"], "description": "The title of the article"}, {"name": "content", "dataType": ["text"], "description": "The content of the article"}, {"name": "datePublished", "dataType": ["date"], "description": "The date the article was published"}, {"name": "url", "dataType": ["string"], "description": "The URL of the article"}]}, {"class": "Author", "description": "A class to store authors", "properties": [{"name": "name", "dataType": ["string"], "description": "The name of the author"}, {"name": "articles", "dataType": ["Article"], "description": "The articles written by the author"}]}]}' \
-        http://weaviate:8080/v1/schema
+      # 4. Spin up MinIO & Weaviate via Docker Compose
+      - name: Launch POC stack
+        run: docker compose -f build-context-docker-compose.yaml up -d
 
-    - name: Index Data
-      run: |
-        docker-compose exec -T weaviate curl -X POST -H "Content-Type: application/json" \
-        --data @./weaviate/data.json http://weaviate:8080/v1/objects
+      # 5. Wait for Weaviate to be ready
+      - name: Wait for Weaviate service
+        run: |
+          echo "Waiting for Weaviate to start..."
+          sleep 15
 
-    - name: Perform Backup
-      run: |
-        docker-compose exec -T weaviate curl -X POST -H "Content-Type: application/json" \
-        --data '{"id": "backup-id"}' http://weaviate:8080/v1/backups/s3
+      # 6. Create Weaviate schema
+      - name: Create Weaviate Schema
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            --data @./weaviate/schema.json \
+            http://localhost:8080/v1/schema
 
-    - name: Restore Data
-      run: |
-        docker-compose exec -T weaviate curl -X POST -H "Content-Type: application/json" \
-        http://weaviate:8080/v1/backups/s3/backup-id/restore
+      # 7. Index sample data
+      - name: Index Data
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            --data @./weaviate/data.json \
+            http://localhost:8080/v1/objects
 
-    - name: Clean up
-      run: docker-compose down
+      # 8. Perform Backup to MinIO
+      - name: Perform Backup
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            --data '{"id":"backup-id"}' \
+            http://localhost:8080/v1/backups/s3
+
+      # 9. Restore Data from Backup
+      - name: Restore Data
+        run: |
+          curl -X POST http://localhost:8080/v1/backups/s3/backup-id/restore
+
+      # 10. Tear down
+      - name: Clean up
+        run: docker compose -f build-context-docker-compose.yaml down
