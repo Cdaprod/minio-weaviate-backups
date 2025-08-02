@@ -10,6 +10,8 @@ This repository contains the necessary configurations and instructions to set up
 
 [![Update README with Directory Tree](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/update_readme.yml/badge.svg)](https://github.com/Cdaprod/minio-weaviate-backups/actions/workflows/update_readme.yml)
 
+(Failure is due to GitHub payments)
+
 ## Project Structure
 
 Below is the directory structure of the `minio-weaviate-backups` project, which includes Docker Compose configurations, Dockerfile for MinIO setup, entrypoint scripts, and Weaviate data schemas.
