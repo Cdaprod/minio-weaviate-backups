@@ -1,4 +1,3 @@
-/.github/workflows/weaviate-poc-test.yml
 name: Weaviate POC Test
 
 on: [push]
